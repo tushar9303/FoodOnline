@@ -7,7 +7,7 @@ class UserManager(BaseUserManager):
             raise ValueError('User must have an email address')
         
         if not username:
-            raise ValueError('User must have an username')
+            raise ValueError('User must have an usernameone')
         
         user = self.model(
             email = self.normalize_email(email),
