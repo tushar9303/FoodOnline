@@ -87,26 +87,26 @@ WSGI_APPLICATION = 'foodonline_main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-USE_SQLITE = config('USE_SQLITE', default=True, cast=bool)
+# USE_SQLITE = config('USE_SQLITE', default=True, cast=bool)
 
-if USE_SQLITE:
-    DATABASES = {
+# if USE_SQLITE:
+#    DATABASES = {
+#        'default': {
+#            'ENGINE': 'django.db.backends.sqlite3',
+#            'NAME': BASE_DIR / 'db.sqlite3',
+#        }
+#    }
+# else: 
+DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': config('DB_NAME', default='foodonline'),
-            'USER': config('DB_USER', default='postgres'),
-            'PASSWORD': config('DB_PASSWORD', default='postgres'),
-            'HOST': config('DB_HOST', default='localhost'),
-            'PORT': config('DB_PORT', default='5432'),
-        }
-    }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME', default='foodonline'),
+        'USER': config('DB_USER', default='postgres'),
+        'PASSWORD': config('DB_PASSWORD', default='postgres'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
+     }
+}
 AUTH_USER_MODEL = 'accounts.User'
 
 # Password validation
