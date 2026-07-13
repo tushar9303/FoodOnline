@@ -1,6 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-# Create your models here.
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+
+
 class UserManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, phone_number, password=None):
         if not email:
@@ -35,12 +36,13 @@ class UserManager(BaseUserManager):
         user.is_admin = True
         user.is_active = True
         user.is_staff = True
+        user.is_superuser = True
         user.is_superadmin = True
         user.save(using=self._db)
         return user
 
-    
-class User(AbstractBaseUser):
+
+class User(AbstractBaseUser, PermissionsMixin):
     RESTAURANT = 1
     CUSTOMER = 2
 
@@ -62,7 +64,8 @@ class User(AbstractBaseUser):
     modified_date = models.DateTimeField(auto_now=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True) 
+    is_active = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=False)
     is_superadmin = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
@@ -73,7 +76,7 @@ class User(AbstractBaseUser):
         return self.email
         
     def has_perm(self, perm, obj=None):
-        return self.is_admin
-    
+        return self.is_admin or self.is_superuser
+
     def has_module_perms(self, app_label):
         return True
