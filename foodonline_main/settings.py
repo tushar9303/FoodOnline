@@ -12,19 +12,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import os
 from pathlib import Path
+from decouple import config
 
-try:
-    from decouple import config
-except ImportError:
-    def config(name, default=None, cast=None):
-        value = os.environ.get(name, default)
-        if value is None:
-            return default
-        if cast is bool:
-            return str(value).strip().lower() in {"1", "true", "yes", "on"}
-        if cast is int:
-            return int(value)
-        return value
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
