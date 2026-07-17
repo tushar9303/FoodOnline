@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'foodonline_main.wsgi.application'
 #    DATABASES = {
 #        'default': {
 #            'ENGINE': 'django.db.backends.sqlite3',
-#            'NAME': BASE_DIR / 'db.sqlite3',
+#            'NAME': BASE_DIR / 'db.sqlite3', this code commented out because we are using postgresql database
 #        }
 #    }
 # else: 
