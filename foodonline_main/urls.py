@@ -1,5 +1,5 @@
 """
-URL configuration for foodonline_main project.
+URL configuration for foodonline_main projects.
 """
 from django.contrib import admin
 from django.urls import path
